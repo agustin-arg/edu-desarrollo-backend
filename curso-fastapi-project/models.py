@@ -1,13 +1,14 @@
-from pydantic import BaseModel 
+from pydantic import BaseModel
+from sqlmodel import SQLModel, Field
 
-class CustomerBase(BaseModel):
-    name: str
-    description: str
-    email: str
-    age: int
+class CustomerBase(SQLModel):
+    name: str = Field(default=None)
+    description: str | None = Field(default=None)
+    email: str = Field(default=None)
+    age: int = Field(default=None)
     
-class Customer(CustomerBase):
-    id: int | None = None
+class Customer(CustomerBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
     
 class CustomerCreate(CustomerBase):
     pass

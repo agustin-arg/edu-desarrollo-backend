@@ -1,9 +1,12 @@
 import zoneinfo
 from fastapi import FastAPI
 from datetime import datetime
-from models import Customer, CustomerCreate, Transaction, Invoice    
+from models import Customer, CustomerCreate, Transaction, Invoice
+from db import create_all_tables, SessionDep
+from sqlmodel import select
       
-app = FastAPI()
+app = FastAPI(lifespan=create_all_tables)
+
 
 @app.get("/")
 async def root():
@@ -24,19 +27,17 @@ async def time(iso_code: str):
     tz = zoneinfo.ZoneInfo(timezone_str)
     return{"time": datetime.now(tz)}
 
-
-db_customer: list[Customer] = []
-
 @app.post("/customers", response_model= Customer)
-async def create_customer(customer_data: CustomerCreate):
+async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     customer = Customer.model_validate(customer_data.model_dump())
-    customer.id = len(db_customer)
-    db_customer.append(customer)
+    session.add(customer)
+    session.commit() #Siempre debe haber un commit
+    session.refresh(customer)
     return customer 
 
 @app.get("/customers", response_model=list[Customer])
-async def list_customer():
-    return db_customer
+async def list_customer(session: SessionDep):
+    return session.exec(select(Customer)).all()
 
 @app.post("/invoice")
 async def create_invoice(customer_data: Invoice):
@@ -45,3 +46,14 @@ async def create_invoice(customer_data: Invoice):
 @app.post("/transaction")
 async def create_transaction(customer_data: Transaction):
     return customer_data
+
+# def ShearchCustomer(id):
+#     for customer in db_customer:
+#         if id == customer.id:
+#             return customer
+#     return "Not found"
+    
+
+# @app.post("/customers/{id}")
+# async def customer(id: int):
+#     return ShearchCustomer(id)
