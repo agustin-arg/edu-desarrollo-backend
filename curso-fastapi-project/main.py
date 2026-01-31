@@ -1,5 +1,5 @@
 import zoneinfo
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from datetime import datetime
 from models import Customer, CustomerCreate, Transaction, Invoice
 from db import create_all_tables, SessionDep
@@ -20,14 +20,14 @@ country_timezones = {
     "PE": "America/Lima",
 }
 
-@app.get("/time/{iso_code}")
+@app.get("/time/{iso_code}", tags=['date'])
 async def time(iso_code: str):
     iso = iso_code.upper()
     timezone_str = country_timezones.get(iso)
     tz = zoneinfo.ZoneInfo(timezone_str)
     return{"time": datetime.now(tz)}
 
-@app.post("/customers", response_model= Customer)
+@app.post("/customers", response_model= Customer, tags=['customers'])
 async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     customer = Customer.model_validate(customer_data.model_dump())
     session.add(customer)
@@ -35,25 +35,20 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     session.refresh(customer)
     return customer 
 
-@app.get("/customers", response_model=list[Customer])
+@app.get("/customers", response_model=list[Customer], tags=['customers'])
 async def list_customer(session: SessionDep):
     return session.exec(select(Customer)).all()
 
-@app.post("/invoice")
+@app.post("/invoice", tags=['customers'])
 async def create_invoice(customer_data: Invoice):
     return customer_data
 
-@app.post("/transaction")
+@app.post("/transaction", tags=['customers'])
 async def create_transaction(customer_data: Transaction):
     return customer_data
 
-# def ShearchCustomer(id):
-#     for customer in db_customer:
-#         if id == customer.id:
-#             return customer
-#     return "Not found"
-    
-
-# @app.post("/customers/{id}")
-# async def customer(id: int):
-#     return ShearchCustomer(id)
+@app.post("/customers/{customer_id}", tags=['customers'])
+async def get_customer(customer_id: int, session: SessionDep):
+    if session.get(Customer, customer_id) == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
+    return session.get(Customer, customer_id)

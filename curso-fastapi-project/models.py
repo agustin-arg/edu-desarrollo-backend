@@ -25,5 +25,5 @@ class Invoice(BaseModel):
     total: int
     
     def total(self):
-        return sum(transactions.ammount for transaction in self.transactions)
+        return sum(transaction.ammount for transaction in self.transactions)
     
