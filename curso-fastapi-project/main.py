@@ -47,7 +47,7 @@ async def create_invoice(customer_data: Invoice):
 async def create_transaction(customer_data: Transaction):
     return customer_data
 
-@app.post("/customers/{customer_id}", tags=['customers'])
+@app.post("/customers/{customer_id}", response_model= Customer, tags=['customers'])
 async def get_customer(customer_id: int, session: SessionDep):
     if session.get(Customer, customer_id) == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")

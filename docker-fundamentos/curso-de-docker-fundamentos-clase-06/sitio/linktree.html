@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mis Enlaces</title>
+<script src="https://unpkg.com/feather-icons"></script>
+<style>
+  /* Reset básico y tipografía limpia */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* Fondo gris muy claro */
+    color: #212529; /* Texto gris casi negro para mejor lectura */
+    line-height: 1.6;
+    padding: 20px;
+  }
+
+  /* Contenedor principal centrado y con ancho máximo */
+  .container {
+    width: 100%;
+    max-width: 480px; /* Ancho estrecho para estilo minimalista */
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  /* Estilos de la sección de perfil */
+  .profile-header {
+    margin-bottom: 40px;
+  }
+
+  .profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%; /* Circular */
+    object-fit: cover; /* Asegura que la foto llene el círculo sin deformarse */
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra muy suave */
+    margin-bottom: 20px;
+  }
+
+  .user-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #000;
+  }
+
+  .user-bio {
+    font-size: 1rem;
+    color: #6c757d; /* Color de texto secundario */
+  }
+
+  /* Estilos de los encabezados de sección */
+  h4.section-title {
+    margin-top: 35px;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #adb5bd; /* Gris claro para los títulos */
+  }
+
+  /* Contenedor de enlaces y estilos de botones */
+  .links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espacio entre botones */
+  }
+
+  .link-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #212529;
+    background-color: #ffffff;
+    border: 1px solid #e9ecef; /* Borde sutil */
+    border-radius: 8px; /* Esquinas ligeramente redondeadas */
+    font-weight: 500;
+    transition: all 0.3s ease; /* Transición suave para el hover */
+  }
+
+  /* Efecto al pasar el mouse por encima */
+  .link-btn:hover {
+    background-color: #212529;
+    color: #ffffff;
+    border-color: #212529;
+    transform: translateY(-2px); /* Pequeño levantamiento */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  }
+
+  /* Estilos del pie de página */
+  .bottom {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #adb5bd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bottom svg {
+    width: 16px;
+    height: 16px;
+    stroke: #adb5bd;
+    fill: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="profile-header">
+      <img src="image_0.png" class="profile-img" alt="Foto de perfil">
+      
+      <h1 class="user-name">Tu Nombre</h1>
+      <p class="user-bio">Bienvenido a mi espacio digital.</p>
+    </div>
+
+    <h4 class="section-title">Mis Redes Sociales</h4>
+    <div class="links-container">
+      <a href="#" class="link-btn" target="_blank">Facebook</a>
+      <a href="#" class="link-btn" target="_blank">Instagram</a>
+      <a href="#" class="link-btn" target="_blank">X (Twitter)</a>
+      <a href="#" class="link-btn" target="_blank">Github</a>
+    </div>
+
+    <h4 class="section-title">Mi Experiencia</h4>
+    <div class="links-container">
+      <a href="#" class="link-btn" target="_blank">LinkedIn</a>
+    </div>
+
+    <h4 class="section-title">Más Contenido</h4>
+    <div class="links-container">
+      <a href="#" class="link-btn" target="_blank">Mi Blog Personal</a>
+    </div>
+
+    <div class="bottom">
+      <i data-feather="heart"></i>
+      <span>2023</span>
+      <i data-feather="heart"></i>
+    </div>
+
+  </div>
+
+  <script>
+    feather.replace()
+  </script>
+</body>  
+</html>
