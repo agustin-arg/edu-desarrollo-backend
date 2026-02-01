@@ -12,6 +12,9 @@ class Customer(CustomerBase, table=True):
     
 class CustomerCreate(CustomerBase):
     pass
+
+class CustomerUpdate(CustomerBase):
+    pass
     
 class Transaction(BaseModel):
     id: int
