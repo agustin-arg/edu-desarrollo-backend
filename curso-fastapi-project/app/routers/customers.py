@@ -6,49 +6,42 @@ from db import SessionDep
 
 router = APIRouter(tags=['customers'])
 
-@router.post("/customers", response_model= Customer)
+@router.post("/customers", response_model=Customer, status_code=status.HTTP_201_CREATED)
 async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     customer = Customer.model_validate(customer_data.model_dump())
     session.add(customer)
-    session.commit() #Siempre debe haber un commit
+    session.commit()
     session.refresh(customer)
     return customer 
 
-@router.post("/customers/{customer_id}", response_model= Customer)
+@router.get("/customers/{customer_id}", response_model=Customer)
 async def get_customer(customer_id: int, session: SessionDep):
-    if session.get(Customer, customer_id) == None:
+    customer = session.get(Customer, customer_id)
+    if customer is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
-    return session.get(Customer, customer_id)
+    return customer
 
-@router.delete("/customers/{customer_id}")
-async def get_customer(customer_id: int, session: SessionDep):
-    customer_db = session.get(Customer, customer_id)
-    if customer_db == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
-    session.delete(customer_db)
-    session.commit()
-    return {"detail": "ok"}
+@router.get("/customers", response_model=list[Customer])
+async def list_customers(session: SessionDep):
+    return session.exec(select(Customer)).all()
 
-@router.patch("/customers/{customer_id}", response_model= Customer, status_code=status.HTTP_201_CREATED)
-async def get_customer(customer_id: int, customer_data: CustomerUpdate, session: SessionDep):
+@router.patch("/customers/{customer_id}", response_model=Customer)
+async def update_customer(customer_id: int, customer_data: CustomerUpdate, session: SessionDep):
     customer_db = session.get(Customer, customer_id)
-    if customer_db == None:
+    if customer_db is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
     customer_data_dict = customer_data.model_dump(exclude_unset=True)
     customer_db.sqlmodel_update(customer_data_dict)
     session.add(customer_db)
     session.commit()
-    session.refresh()
-    return {"update": "ok"}
+    session.refresh(customer_db)
+    return customer_db
 
-@router.post("/customers", response_model= Customer)
-async def update_customer(customer_data: CustomerCreate, session: SessionDep):
-    customer = Customer.model_validate(customer_data.model_dump())
-    session._update_impl(customer)
-    session.commit() #Siempre debe haber un commit
-    session.refresh(customer)
-    return customer 
-
-@router.get("/customers", response_model=list[Customer])
-async def list_customer(session: SessionDep):
-    return session.exec(select(Customer)).all()
+@router.delete("/customers/{customer_id}")
+async def delete_customer(customer_id: int, session: SessionDep):
+    customer_db = session.get(Customer, customer_id)
+    if customer_db is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
+    session.delete(customer_db)
+    session.commit()
+    return {"detail": "Customer deleted successfully"}

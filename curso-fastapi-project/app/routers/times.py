@@ -12,7 +12,7 @@ country_timezones = {
     "PE": "America/Lima",
 }
 
-@router.get("/time/{iso_code}", tags=['date'])
+@router.get("/time/{iso_code}")
 async def time(iso_code: str):
     iso = iso_code.upper()
     timezone_str = country_timezones.get(iso)
