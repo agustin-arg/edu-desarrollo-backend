@@ -1,12 +1,12 @@
 from fastapi import APIRouter, status, HTTPException
 from sqlmodel import select
 
-from models import Customer, CustomerCreate, CustomerUpdate
+from models import Customer, CustomerCreate, CustomerUpdate, Plan, CustomerPlan
 from db import SessionDep
 
-router = APIRouter(tags=['customers'])
+router = APIRouter(prefix="/customers",tags=['customers'])
 
-@router.post("/customers", response_model=Customer, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Customer, status_code=status.HTTP_201_CREATED)
 async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     customer = Customer.model_validate(customer_data.model_dump())
     session.add(customer)
@@ -14,18 +14,18 @@ async def create_customer(customer_data: CustomerCreate, session: SessionDep):
     session.refresh(customer)
     return customer 
 
-@router.get("/customers/{customer_id}", response_model=Customer)
+@router.get("/{customer_id}", response_model=Customer)
 async def get_customer(customer_id: int, session: SessionDep):
     customer = session.get(Customer, customer_id)
     if customer is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
     return customer
 
-@router.get("/customers", response_model=list[Customer])
+@router.get("/", response_model=list[Customer])
 async def list_customers(session: SessionDep):
     return session.exec(select(Customer)).all()
 
-@router.patch("/customers/{customer_id}", response_model=Customer)
+@router.patch("/{customer_id}", response_model=Customer)
 async def update_customer(customer_id: int, customer_data: CustomerUpdate, session: SessionDep):
     customer_db = session.get(Customer, customer_id)
     if customer_db is None:
@@ -37,7 +37,7 @@ async def update_customer(customer_id: int, customer_data: CustomerUpdate, sessi
     session.refresh(customer_db)
     return customer_db
 
-@router.delete("/customers/{customer_id}")
+@router.delete("/{customer_id}")
 async def delete_customer(customer_id: int, session: SessionDep):
     customer_db = session.get(Customer, customer_id)
     if customer_db is None:
@@ -45,3 +45,26 @@ async def delete_customer(customer_id: int, session: SessionDep):
     session.delete(customer_db)
     session.commit()
     return {"detail": "Customer deleted successfully"}
+
+@router.post("/{customer_id}/plans/{plan_id}", tags=["plans"])
+async def subscribe_custmer_to_plan(customer_id: int, plan_id: int, session: SessionDep):
+    customer_db = session.get(Customer, customer_id)
+    plan_db = session.get(Plan, plan_id)
+    if customer_db is None or plan_db is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Customer or plan not found")
+    customer_plan_db = CustomerPlan(customer_id=customer_id, plan_id= plan_id)
+    session.add(customer_plan_db)
+    session.commit()
+    session.refresh(customer_plan_db)
+    return(customer_plan_db)
+
+@router.get("/{customer_id}/plans", tags=["plans"])
+async def list_plans_customer(customer_id:int, session: SessionDep):
+    customer_db = session.get(Customer, customer_id)
+    if customer_db is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Customer not found")
+    return customer_db.plans
+
+

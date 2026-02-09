@@ -2,6 +2,7 @@
 from app.models import (
     Plan,
     CustomerPlan,
+    PlanCreate,
     Customer,
     CustomerBase,
     CustomerCreate,
@@ -14,6 +15,7 @@ from app.models import (
 
 __all__ = [
     "Plan",
+    "PlanCreate",
     "CustomerPlan",
     "Customer",
     "CustomerBase",

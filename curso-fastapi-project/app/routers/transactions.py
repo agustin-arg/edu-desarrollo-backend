@@ -16,7 +16,7 @@ async def create_transaction(transaction_data: TransactionCreate, session: Sessi
     session.refresh(transaction_db)
     return transaction_db
 
-@router.post("/transactions")
+@router.get("/transactions")
 async def list_transaction(session: SessionDep):
     query=select(Transaction)
     transactions = session.exec(query).all()
