@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models import Invoice
+from app.models import Invoice
 
 router = APIRouter(tags=["invoices"])
 

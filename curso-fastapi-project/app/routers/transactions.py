@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from models import Transaction, TransactionCreate, Customer
+from app.models import Transaction, TransactionCreate, Customer
 from db import SessionDep
 from sqlmodel import select
 router = APIRouter(tags=["transactions"])

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models import Plan, PlanCreate
+from app.models import Plan, PlanCreate
 from db import SessionDep
 from sqlmodel import select
 

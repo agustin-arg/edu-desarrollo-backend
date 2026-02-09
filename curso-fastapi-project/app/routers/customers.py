@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 from sqlmodel import select
 
-from models import Customer, CustomerCreate, CustomerUpdate, Plan, CustomerPlan
+from app.models import Customer, CustomerCreate, CustomerUpdate, Plan, CustomerPlan
 from db import SessionDep
 
 router = APIRouter(prefix="/customers",tags=['customers'])
