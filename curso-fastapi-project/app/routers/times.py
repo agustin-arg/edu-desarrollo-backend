@@ -12,9 +12,10 @@ country_timezones = {
     "PE": "America/Lima",
 }
 
+
 @router.get("/time/{iso_code}")
 async def time(iso_code: str):
     iso = iso_code.upper()
     timezone_str = country_timezones.get(iso)
     tz = zoneinfo.ZoneInfo(timezone_str)
-    return{"time": datetime.now(tz)}
+    return {"time": datetime.now(tz)}

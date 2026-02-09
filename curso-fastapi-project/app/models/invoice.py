@@ -2,6 +2,7 @@ from .base import BaseModel
 from .customer import Customer
 from .transaction import Transaction
 
+
 class Invoice(BaseModel):
     id: int
     customer: Customer

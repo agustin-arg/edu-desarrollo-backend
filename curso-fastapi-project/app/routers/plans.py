@@ -3,7 +3,8 @@ from app.models import Plan, PlanCreate
 from db import SessionDep
 from sqlmodel import select
 
-router = APIRouter(prefix="/plans" ,tags=["plans"])
+router = APIRouter(prefix="/plans", tags=["plans"])
+
 
 @router.post("/", response_model=Plan)
 async def create_plan(plan_data: PlanCreate, session: SessionDep):
@@ -12,7 +13,8 @@ async def create_plan(plan_data: PlanCreate, session: SessionDep):
     session.commit()
     session.refresh(plan_db)
     return plan_db
- 
+
+
 @router.get("/", response_model=list[Plan])
-async def list_plans(session: SessionDep): 
+async def list_plans(session: SessionDep):
     return session.exec(select(Plan)).all()
