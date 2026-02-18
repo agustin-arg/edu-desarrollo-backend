@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
-    container_name: mysql_container
+    container_name: fasapi_db_mysql
     restart: "no" 
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
