@@ -12,10 +12,15 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-class Nore(db.Model):
+with app.app_context():
+    db.create_all()
+    
+class Note(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=True)
     content = db.Column(db.String(200), nullable=True)
+    created_at = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
+    
     
     def __repr__(self):
         return f"<Note {self.id}: {self.title}"

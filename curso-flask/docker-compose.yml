@@ -3,10 +3,27 @@ services:
     image: postgres:18.2
     container_name: flask_db_postgres
     restart: "no" 
+    shm_size: 128mb
     environment:
-      POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DATABASE: ${DB_NAME}
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      TZ: America/Argentina/Buenos_Aires 
     ports:
       - "${DB_PORT}:5432"
+    logging:
+            driver: "json-file"
+            options:
+                max-size: "25m"
+  
+  adminer:
+    image: adminer
+    restart: "no" 
+    depends_on:
+      - db
+    ports:
+    - "9099:8080"
+    logging:
+            driver: "json-file"
+            options:
+                max-size: "25m"
