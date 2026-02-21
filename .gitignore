@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 docker-fundamentos/curso-de-docker-fundamentos-clase-16/agustin_docker_website.rar
 flask/
+.vscode
+IMG/

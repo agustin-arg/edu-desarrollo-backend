@@ -8,18 +8,35 @@
 
 <body>
     <h1>Welcom to Flask Notes</h1>
-    {% if role == "admin" %}
-    <button>Delete</button>
-    {% else %}
-    <button>Request deletion</button>
-    {% endif %}
-    <ul>
+    <button id="showBtn">show notes</button><button id="hideBtn">hide notes</button>
+    <ul id="notesList">
         {% for note in notes %}
-        <li>
-            {{ note }}
-        </li>
+            <li><strong>{{ note.title }}</strong>: {{ note.content }} 
+                <br>
+                <em>({{ note.created_at }})</em></li>
+        {% else %}
+            <li>No hay notas guardadas.</li>
         {% endfor %}
     </ul>
+    <br>
+    <a href="{{url_for('create_note')}}">Add new note</a>
+
+    <script>
+        const showBtn = document.getElementById('showBtn');
+        const hideBtn = document.getElementById('hideBtn');
+        const notesList = document.getElementById('notesList');
+
+        // start hidden (opcional)
+        // notesList.style.display = 'none';
+
+        showBtn.addEventListener('click', () => {
+            notesList.style.display = 'block';
+        });
+
+        hideBtn.addEventListener('click', () => {
+            notesList.style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>

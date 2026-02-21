@@ -12,40 +12,30 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-with app.app_context():
-    db.create_all()
-    
+
 class Note(db.Model):
-    id=db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=True)
     content = db.Column(db.String(200), nullable=True)
-    created_at = db.Column(db.DateTime, nullable = False, default = datetime.strftime(datetime.today(), "%b %d %Y"))
-    
-    
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.strftime(datetime.today(), "%b %d %Y"),
+    )
+
     def __repr__(self):
         return f"<Note {self.id}: {self.title}"
-    
+
+
+with app.app_context():
+    db.create_all()
+
+
 @app.route("/")
-def hello():
+def home():
     role = "user"
-    notes = [
-        {
-            "title": "Note 1",
-            "created_at": datetime.now().strftime("%Y-%m-%d"),
-            "completed": True,
-        },
-        {
-            "title": "Note 2",
-            "created_at": datetime.now().strftime("%Y-%m-%d"),
-            "completed": False,
-        },
-        {
-            "title": "Note 3",
-            "created_at": datetime.now().strftime("%Y-%m-%d"),
-            "completed": True,
-        },
-    ]
-    return render_template("home.html", role=role, notes=notes)
+    notes = Note.query.all()
+    return render_template("home.html", notes=notes)
 
 
 @app.route("/about")
@@ -65,20 +55,22 @@ def api_info():
     data = {"nombre": "Note app", "version": "1.1.1"}
     return jsonify(data), 200
 
+
 @app.route("/confirmation", methods=["GET", "POST"])
-def confirmation():    
-    print(request)    
-    value:str = request.args.get("note", "Not found")
-    data = {"status":"OK", "value": value}    
+def confirmation():
+    print(request)
+    value: str = request.args.get("note", "Not found")
+    data = {"status": "OK", "value": value}
     return jsonify(data), 200
+
 
 @app.route("/create-note", methods=["GET", "POST"])
 def create_note():
     if request.method == "POST":
-        note = request.form.get(
-            "note", "Not found"
-        )  # The note was definid it in "note_from.html" file
-        return redirect(
-            url_for("confirmation", note=note)
-        )
+        title = request.form.get("title", "")
+        content = request.form.get("content", "")
+        db_note = Note(title=title, content=content)
+        db.session.add(db_note)
+        db.session.commit()
+        return redirect(url_for("home", note=db_note))
     return render_template("note_from.html")
