@@ -1,33 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <form action="#" method="post" >
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required placeholder="username@example.com">
-        </div>
-        <div>
-            <label for="telephone">Telephone</label>
-            <input type="tel" name="telephone" id="telephone" title="Enter 9 digits" pattern="[0-9]{9}">
-        </div>
-        <div>
-            <label for="amount">Amount</label>
-            <input type="number" name="amount" id="amount" min="0" max="100" step="10">
-        </div>
-        <div>
-            <label for="date">Date time</label>
-            <input type="date" name="date" id="date" required max="2008-01-01">
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required placeholder="Minimum 8 characters" minlength="8">
-        </div>
-        <button>Send</button>
+  </head>
+  <body>
+    <form action="#" method="post">
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="username@example.com"
+        />
+      </div>
+      <div>
+        <label for="telephone">Telephone</label>
+        <input
+          type="tel"
+          name="telephone"
+          id="telephone"
+          title="Enter 9 digits"
+          pattern="[0-9]{9}"
+        />
+      </div>
+      <div>
+        <label for="amount">Amount</label>
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          min="0"
+          max="100"
+          step="10"
+        />
+      </div>
+      <div>
+        <label for="date">Date time</label>
+        <input type="date" name="date" id="date" required max="2008-01-01" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+          placeholder="Minimum 8 characters"
+          minlength="8"
+        />
+      </div>
+      <button>Send</button>
     </form>
-</body>
+  </body>
 </html>

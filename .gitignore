@@ -1,8 +1,20 @@
-fastapi/
-__pycache__/
+# -------------------------
+# Virtual environments
+# -------------------------
 .env
-*.pyc
-docker-fundamentos/curso-de-docker-fundamentos-clase-16/agustin_docker_website.rar
+fastapi/
 flask/
+# -------------------------
+# Python cache 
+# -------------------------
+__pycache__/
+*.pyc
+# -------------------------
+# Code editor
+# -------------------------
 .vscode
+# -------------------------
+# Multimedia
+# -------------------------
 IMG/
+multimedia/
