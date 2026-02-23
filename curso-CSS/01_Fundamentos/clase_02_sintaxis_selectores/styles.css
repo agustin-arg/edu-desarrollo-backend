@@ -1,0 +1,32 @@
+p{
+    margin-bottom: 30px;
+}
+
+.rojo {
+    color: red;
+}
+
+.contenedor {
+    border: 2px solid blueviolet;
+}
+
+.contenedor p {
+    background-color: aqua;
+}
+
+#unico {
+    background-color: yellow;
+}
+
+button:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+a:link {
+    color: tomato;
+}
+
+a:visited {
+    background-color: tan;
+}

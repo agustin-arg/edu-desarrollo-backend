@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Edit note</h1>
+    <form method="POST">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" value="{{note.title}}" />
+
+      <br />
+      <label for="content">Content</label>
+      <input type="text" name="content" id="content" value="{{note.content}}" />
+
+      <br />
+      <label for="post">Post</label>
+      <input
+        type="date"
+        name="post"
+        id="post"
+        value="{{ note.post_at.strftime('%Y-%m-%d') if note.post_at else '' }}"
+      />
+
+      <input type="submit" value="save" />
+    </form>
+  </body>
+</html>

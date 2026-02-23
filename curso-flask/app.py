@@ -1,5 +1,5 @@
 from flask import Flask, redirect, request, jsonify, render_template, url_for
-from datetime import datetime
+from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 from config import setting
 
@@ -13,15 +13,37 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
+# --- Date utilities ---
+def now_utc():
+    """Return timezone-aware current UTC datetime."""
+    return datetime.now()
+
+
+def parse_datetime(value: str):
+    """Try parsing a date/time string into a timezone-aware datetime (UTC).
+
+    Supports several common formats. Returns None if parsing fails or
+    if `value` is falsy.
+    """
+    if not value:
+        return None
+    formats = ("%Y-%m-%d", "%Y-%m-%d %H:%M", "%d/%m/%y", "%d/%m/%y %H:%M")
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(value, fmt)
+            return dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+    return None
+
+
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=True)
-    content = db.Column(db.String(200), nullable=True)
-    created_at = db.Column(
-        db.DateTime,
-        nullable=False,
-        default=datetime.strftime(datetime.today(), "%b %d %Y"),
-    )
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=True, default=now_utc)
+    edited_at = db.Column(db.DateTime, nullable=True)
+    post_at = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return f"<Note {self.id}: {self.title}"
@@ -35,7 +57,8 @@ with app.app_context():
 def home():
     role = "user"
     notes = Note.query.all()
-    return render_template("home.html", notes=notes)
+    now = now_utc()
+    return render_template("home.html", notes=notes, now=now)
 
 
 @app.route("/about")
@@ -69,8 +92,29 @@ def create_note():
     if request.method == "POST":
         title = request.form.get("title", "")
         content = request.form.get("content", "")
-        db_note = Note(title=title, content=content)
+        post = request.form.get("post", "")
+        # parse `post` into timezone-aware datetime objects
+        post_dt = parse_datetime(post)
+        db_note = Note(title=title, content=content, post_at=post_dt)
         db.session.add(db_note)
         db.session.commit()
-        return redirect(url_for("home", note=db_note))
-    return render_template("note_from.html")
+        return redirect(url_for("home"))
+    now = now_utc()
+    return render_template("note_from.html", now=now)
+
+
+@app.route("/edit-note/<int:id>", methods=["GET", "POST"])
+def edit_note(id):
+    note = Note.query.get_or_404(id)
+    if request.method == "POST":
+        title = request.form.get("title", "")
+        content = request.form.get("content", "")
+        content = request.form.get("content", "")
+        post = request.form.get("post", "")
+        note.title = title
+        note.content = content
+        note.post_at = parse_datetime(post)
+        note.edited_at = now_utc()
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("edit_note.html", note=note)
