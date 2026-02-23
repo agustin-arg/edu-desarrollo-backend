@@ -52,7 +52,7 @@ def contact():
 
 @app.route("/api/info")
 def api_info():
-    data = {"nombre": "Note app", "version": "1.1.1"}
+    data = {"name": "Note app", "version": "1.1.1"}
     return jsonify(data), 200
 
 
