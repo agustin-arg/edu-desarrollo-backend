@@ -23,11 +23,13 @@
             <th>Content</th>
             <th>created</th>
             <th>edited</th>
+            <th>delete</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {% for note in notes %} {% if not note.post_at or note.post_at <= now %}
+          {% for note in notes %} {% if not note.post_at or note.post_at <= now
+          %}
           <tr>
             <td>{{ note.id }}</td>
             <td>{{ note.title }}</td>
@@ -35,6 +37,14 @@
             <td>{{ note.created_at }}</td>
             <td>{{ note.edited_at }}</td>
             <td><a href="{{ url_for('edit_note', id=note.id) }}">edit</a></td>
+            <td>
+              <form
+                method="post"
+                action="{{ url_for('delete_note', id=note.id) }}"
+              >
+                <button type="submit">Deleted</button>
+              </form>
+            </td>
           </tr>
           {% endif %} {% else %}
           <tr>

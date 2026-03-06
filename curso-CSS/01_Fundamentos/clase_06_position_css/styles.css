@@ -1,0 +1,84 @@
+.contenedor,
+.contenedor-padre,
+.contenedor-scroll,
+.contenedor-zindex {
+    border: 2px solid black;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.caja,
+.hijo-absolute,
+.boton-fixed,
+.elemento-sticky,
+.capa {
+    border: 1px solid red;
+    padding: 10px;
+}
+
+.caja-relative {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+.contenedor-padre{
+    position: relative;
+    height: 100px;
+}
+
+.hijo-absolute {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.boton-fixed{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 3;
+}
+
+.contenedor-scroll {
+    height: 150px;
+    overflow-y: auto;
+}
+
+.elemento-sticky{
+    background-color: white;
+    position: sticky;
+    top: 0;
+}
+
+.contenedor-zindex{
+    position: relative;
+    height: 150px;
+}
+
+.capa {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+}
+
+.capa-1 {
+    top: 20px;
+    left: 20px;
+    background-color: chocolate;
+    z-index: 1;
+}
+
+.capa-2 {
+    top: 40px;
+    left: 40px;
+    background-color: rgb(30, 210, 75);
+    z-index: 0;
+}
+
+.capa-3 {
+    top: 60px;
+    left: 60px;
+    background-color: rgb(30, 210, 75);
+    z-index: 3;
+}
