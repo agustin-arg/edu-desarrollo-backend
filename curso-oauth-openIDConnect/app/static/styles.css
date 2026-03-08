@@ -50,3 +50,41 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* Alerts and small shared components */
+.alert {
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+.alert-success {
+  background: #ecfdf5;
+  border: 1px solid #34d399;
+  color: #065f46;
+  margin-bottom: 0.75rem;
+}
+.alert-error {
+  background: #fff1f2;
+  border: 1px solid #f87171;
+  color: #7f1d1d;
+  margin-top: 0.75rem;
+}
+
+.meta-links {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+.meta-links a {
+  color: #6b7280;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.meta-links a.secondary {
+  color: #2563eb;
+}
+.note {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 1rem;
+}

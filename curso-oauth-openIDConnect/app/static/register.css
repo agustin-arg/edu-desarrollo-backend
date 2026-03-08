@@ -1,0 +1,14 @@
+/* Register-specific styles */
+/* Reuse global .alert and .meta-links from styles.css */
+.register-note {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 420px) {
+  .login {
+    width: 92%;
+    padding: 1rem;
+  }
+}

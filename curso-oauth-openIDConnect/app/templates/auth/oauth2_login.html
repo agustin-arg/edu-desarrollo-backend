@@ -5,20 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OAuth2 Login</title>
     <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='login.css') }}" />
   </head>
   <body>
     <div class="container">
       <div class="login">
-        <h1>
-          Login <small style="font-size: 0.6em; color: #166534">OAuth2</small>
-        </h1>
-
+        <h1>Login <small class="method-tag method-oauth2">OAuth2</small></h1>
         {% if message %}
         <div class="alert alert-success">{{ message }}</div>
-        {% endif %} {% if error %}
-        <div class="alert alert-error">{{ error }}</div>
         {% endif %}
-
         <form method="POST" action="{{ url_for('oauth2_login_post') }}">
           <div>
             <label for="username">Username</label>
@@ -42,14 +37,20 @@
           </div>
           <button type="submit">Login</button>
         </form>
-        <p style="font-size: 0.8rem; color: #555; margin-top: 1rem">
+        <p class="note">
           Or use the <a href="/docs">Swagger UI</a> "Authorize" button to get a
           Bearer token.
         </p>
+        <div class="meta-links">
+          <a class="secondary" href="{{ url_for('oauth2_register_form') }}"
+            >Create account</a
+          >
+          <a class="muted" href="{{ url_for('home') }}">← Back to panel</a>
+        </div>
       </div>
-      <a href="{{ url_for('oauth2_register_form') }}">Create account</a>
-      &nbsp;·&nbsp;
-      <a href="{{ url_for('home') }}">← Back to panel</a>
+      {% if error %}
+      <div class="alert alert-error">{{ error }}</div>
+      {% endif %}
     </div>
   </body>
 </html>

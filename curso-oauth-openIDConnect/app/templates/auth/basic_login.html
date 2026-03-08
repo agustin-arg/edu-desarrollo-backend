@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic Login</title>
     <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='login.css') }}" />
   </head>
   <body>
     <div class="container">
       <div class="login">
         <h1>
           Login
-          <small style="font-size: 0.6em; color: #b91c1c">Plain Text</small>
+          <small class="method-tag method-plain">Plain Text</small>
         </h1>
-
         {% if message %}
         <div class="alert alert-success">{{ message }}</div>
-        {% endif %} {% if error %}
-        <div class="alert alert-error">{{ error }}</div>
         {% endif %}
-
         <form method="POST" action="{{ url_for('basic_login_post') }}">
           <div>
             <label for="username">Username</label>
@@ -37,10 +34,16 @@
           </div>
           <button type="submit">Login</button>
         </form>
+        {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+        <div class="meta-links">
+          <a class="secondary" href="{{ url_for('basic_register_form') }}"
+            >Create account</a
+          >
+          <a class="muted" href="{{ url_for('home') }}">← Back to panel</a>
+        </div>
       </div>
-      <a href="{{ url_for('basic_register_form') }}">Create account</a>
-      &nbsp;·&nbsp;
-      <a href="{{ url_for('home') }}">← Back to panel</a>
     </div>
   </body>
 </html>
