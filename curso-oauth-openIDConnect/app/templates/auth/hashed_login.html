@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hashed Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <h1>
+          Login <small style="font-size: 0.6em; color: #854d0e">SHA-256</small>
+        </h1>
+
+        {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+        {% endif %} {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('hashed_login_post') }}">
+          <div>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              maxlength="50"
+            />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              minlength="8"
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      <a href="{{ url_for('hashed_register_form') }}">Create account</a>
+      &nbsp;·&nbsp;
+      <a href="{{ url_for('home') }}">← Back to panel</a>
+    </div>
+  </body>
+</html>

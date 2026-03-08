@@ -1,0 +1,52 @@
+/* Minimal example styles for login */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 320px;
+}
+
+.login h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.login label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.login input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #dfe6ef;
+  border-radius: 4px;
+}
+
+.login button {
+  width: 100%;
+  padding: 0.6rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

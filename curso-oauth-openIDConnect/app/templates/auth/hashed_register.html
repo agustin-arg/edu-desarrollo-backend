@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hashed — Create Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <h1>
+          Create Account
+          <small style="font-size: 0.6em; color: #854d0e">SHA-256</small>
+        </h1>
+
+        {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('hashed_register_post') }}">
+          <div>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              minlength="3"
+              maxlength="50"
+            />
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              minlength="8"
+              placeholder="Minimum 8 characters"
+            />
+          </div>
+          <button type="submit">Create Account</button>
+        </form>
+      </div>
+      <a href="{{ url_for('hashed_login_form') }}"
+        >Already have an account? Login</a
+      >
+      &nbsp;·&nbsp;
+      <a href="{{ url_for('home') }}">← Back to panel</a>
+    </div>
+  </body>
+</html>
