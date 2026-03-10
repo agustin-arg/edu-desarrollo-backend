@@ -15,7 +15,7 @@
       <div class="login">
         <h1>
           Create Account
-          <small class="method-tag method-hash">SHA-256</small>
+          <small class="method-tag method-hash">Back to panel</small>
         </h1>
         {% if message %}
         <div class="alert alert-success">{{ message }}</div>
@@ -49,7 +49,7 @@
           <a class="secondary" href="{{ url_for('hashed_login_form') }}"
             >Already have an account? Login</a
           >
-          <a class="muted" href="{{ url_for('home') }}">← Back to panel</a>
+          <a class="muted" href="{{ url_for('home') }}">Back to panel</a>
         </div>
       </div>
       {% if error %}

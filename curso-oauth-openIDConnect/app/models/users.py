@@ -23,17 +23,17 @@ class UserPlain(SQLModel, table=True):
     password: str  # plain text — stored exactly as the user typed it
 
 
-# Method 2 – SHA-256 Hashed
+# Method 2 –  Hashed
 
 
 class UserHashed(SQLModel, table=True):
-    """Stores passwords as a SHA-256 hex digest (better, but not production-ready)."""
+    """Stores passwords as a  hex digest (better, but not production-ready)."""
 
     __tablename__ = "user_hashed"
 
     id: Optional[int] = Field(default=None, primary_key=True)
     username: str = Field(unique=True, min_length=3, max_length=50)
-    hashed_password: str  # SHA-256 hex string
+    hashed_password: str  #  hex string
 
 
 # Method 3 – JWT

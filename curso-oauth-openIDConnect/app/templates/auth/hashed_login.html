@@ -10,7 +10,9 @@
   <body>
     <div class="container">
       <div class="login">
-        <h1>Login <small class="method-tag method-hash">SHA-256</small></h1>
+        <h1>
+          Login
+        </h1>
         {% if message %}
         <div class="alert alert-success">{{ message }}</div>
         {% endif %}
@@ -37,16 +39,16 @@
           </div>
           <button type="submit">Login</button>
         </form>
+        {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
         <div class="meta-links">
           <a class="secondary" href="{{ url_for('hashed_register_form') }}"
             >Create account</a
           >
-          <a class="muted" href="{{ url_for('home') }}">← Back to panel</a>
+          <a class="muted" href="{{ url_for('home') }}">Back to panel</a>
         </div>
       </div>
-      {% if error %}
-      <div class="alert alert-error">{{ error }}</div>
-      {% endif %}
     </div>
   </body>
 </html>
