@@ -1,0 +1,40 @@
+:root{
+    --color-primary:  rgb(0, 132, 255);
+    --color-secondary: rgb(0, 255, 0);
+    --color-danger: rgb(255, 132, 0);
+    --color-dark: #000000;
+    --color-light:  #ffffff;
+    --space: 20px;
+}
+
+button{
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary{
+    background-color: var(--color-primary);
+}
+
+.btn-secondary{
+    background-color: var(--color-secondary);
+}
+
+.btn-danger{
+    background-color: var(--color-danger);
+}
+
+.card{
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    padding: var(--space);
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.card-dark{
+    --color-light: blue;
+    --color-dark: #ffffff;
+}

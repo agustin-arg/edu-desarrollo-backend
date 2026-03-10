@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    background: #88888847;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+.item{
+    padding: 20px;
+    margin: 5px;
+    background: rgb(0 135 255 / 75%);
+    text-align: center;
+}
+
+.grow{
+    flex-grow: 1;
+}
+
+.flex-1{
+    flex: 1;
+}
+
+.flex-2{
+    flex: 2;
+}
+
+.self-start{
+    align-self: flex-start;
+}
+
+.self-end{
+    align-self: flex-end;
+}

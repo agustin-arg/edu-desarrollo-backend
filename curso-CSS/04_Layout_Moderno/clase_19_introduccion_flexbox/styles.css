@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    background: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+.item{
+    background: rgb(0, 135, 255);
+    color: antiquewhite;
+    padding: 20px;
+    margin: 5px;
+    text-align: center;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.center{
+    justify-content: center;
+}
+
+.align{
+    align-items: center;
+}
