@@ -58,6 +58,7 @@ body {
   padding: 0.5rem;
   border-radius: 4px;
   font-size: 0.95rem;
+  text-align: center;
 }
 .alert-success {
   background: #ecfdf5;

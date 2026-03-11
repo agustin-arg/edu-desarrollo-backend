@@ -10,22 +10,11 @@ router = APIRouter(prefix="/auth/hashed", tags=["Auth – 2. Hashed "])
 
 
 def generate_hash_password(password: str) -> str:
-    print(password)
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
-    print(hashed)
-    print(hashed.decode('utf-8') )
     return hashed.decode('utf-8') 
 
 def verifying_password(password: str, hashed_password: str) -> bool:
-    print(password)
-    print(hashed_password)
-    print(password.encode('utf-8'))
-    print(hashed_password.encode('utf-8'))
-    print(bcrypt.checkpw(password=
-        password.encode('utf-8'), hashed_password=
-        hashed_password.encode('utf-8')
-    ))
     return bcrypt.checkpw(password=
         password.encode('utf-8'), hashed_password=
         hashed_password.encode('utf-8')
@@ -60,10 +49,9 @@ async def login_post(
     user_db = session.exec(
         select(UserHashed).where(UserHashed.username == username)
     ).one_or_none()
-
     if (
         user_db is None
-        or verifying_password(user_db.hashed_password, user_db.hashed_password) == False
+        or verifying_password(password=password, hashed_password=user_db.hashed_password) == False
     ):
         return templates.TemplateResponse(
             "auth/hashed_login.html",
