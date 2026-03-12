@@ -21,7 +21,7 @@ class CustomerPlan(SQLModel, table=True):
 class PlanBase(SQLModel):
     name: str = Field(default=None)
     price: float = Field(default=None)
-    descripcion: str = Field(default=None)
+    description: str = Field(default=None)
 
 
 class Plan(PlanBase, table=True):

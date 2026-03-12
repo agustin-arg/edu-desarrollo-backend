@@ -9,7 +9,7 @@ from .base import (
     select,
 )
 from .plan import CustomerPlan
-from db import SessionDep
+from db import engine
 
 if TYPE_CHECKING:
     from .transaction import Transaction
@@ -24,12 +24,12 @@ class CustomerBase(SQLModel):
 
     @field_validator("email")
     @classmethod
-    def validate_email(selg, value):
-        session = Session(SessionDep)
-        query = select(Customer).where(Customer.email==value)
-        result = session.exec(query).first()
-        if result:
-            raise ValueError("This email is already registered")
+    def validate_email(cls, value):
+        with Session(engine) as session:
+            query = select(Customer).where(Customer.email == value)
+            result = session.exec(query).first()
+            if result:
+                raise ValueError("This email is already registered")
         return value
 
 

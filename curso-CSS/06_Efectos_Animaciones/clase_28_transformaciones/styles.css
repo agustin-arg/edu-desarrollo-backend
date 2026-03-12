@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 20px;
+    
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background: rgba(33, 236, 33, 0.781);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    border-radius: 15%;
+}
+
+.translate-x:hover{
+    transform: translateX(30px);
+}
+
+.translate-y:hover{
+    transform: translateY(-30px);
+}
+
+.translate-xy:hover {
+    transform: translate(20px, 20px);
+}
+
+.rotate-45:hover {
+    transform: rotate(-45deg);
+}
+
+.scale-small:hover{
+    transform: scale(1.07);
+}
