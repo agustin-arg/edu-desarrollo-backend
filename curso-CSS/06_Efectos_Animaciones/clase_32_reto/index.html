@@ -6,53 +6,67 @@
     <title>Agustín Leiva - Portfolio Personal</title>
     <meta
       name="description"
-      content="Portfolio personal de Agustín Alberto Leiva. Desarrollador Backend con Python en formación."
+      content="Portfolio personal de Agustín Alberto Leiva. Desarrollador Backend con Python."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <!-- Header con navegación -->
-    <header class="header">
-      <div class="header__container">
-        <div class="header__brand">
-          <h1 class="header__name">Agustín Leiva</h1>
-          <p class="header__tagline">
-            Desarrollador Backend con Python en Formación
-          </p>
-        </div>
+    <input
+      class="theme-toggle__input"
+      type="checkbox"
+      id="theme-toggle"
+      aria-label="Cambiar entre modo blanco y negro"
+    />
+    <label class="theme-toggle" for="theme-toggle">
+      <span class="theme-toggle__label theme-toggle__label--dark"
+        >Modo negro</span
+      >
+      <span class="theme-toggle__label theme-toggle__label--light"
+        >Modo blanco</span
+      >
+    </label>
 
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a href="#inicio" class="nav__link nav__link--active">Inicio</a>
-            </li>
-            <li class="nav__item">
-              <a href="#sobre-mi" class="nav__link">Sobre mí</a>
-            </li>
-            <li class="nav__item">
-              <a href="#proyectos" class="nav__link">Proyectos</a>
-            </li>
-            <li class="nav__item">
-              <a href="#habilidades" class="nav__link">Habilidades</a>
-            </li>
-            <li class="nav__item">
-              <a href="#contacto" class="nav__link">Contacto</a>
-            </li>
-          </ul>
-        </nav>
+    <header class="header">
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#inicio" class="nav__link nav__link--active">Inicio</a>
+          </li>
+          <li class="nav__item">
+            <a href="#sobre-mi" class="nav__link">Sobre mí</a>
+          </li>
+          <li class="nav__item">
+            <a href="#proyectos" class="nav__link">Proyectos</a>
+          </li>
+          <li class="nav__item">
+            <a href="#habilidades" class="nav__link">Habilidades</a>
+          </li>
+          <li class="nav__item">
+            <a href="#contacto" class="nav__link">Contacto</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__container">
+        <div class="header__content">
+          <div class="header__brand">
+            <h1 class="header__name">Agustín Leiva</h1>
+            <p class="header__tagline">Desarrollador Backend con Python</p>
+          </div>
+
+          <div class="hero__image">
+            <img src="profile.JPG" alt="Imagen de foto de perfil" />
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Contenido principal -->
     <main class="main">
-      <!-- Hero Section -->
       <section class="hero" id="inicio">
         <div class="hero__container">
           <h2 class="hero__title">¡Hola! Soy Agustín Leiva</h2>
-          <p class="hero__subtitle">
-            Desarrollador Backend con Python en Formación
-          </p>
+          <p class="hero__subtitle">Desarrollador Backend con Python</p>
           <p class="hero__description">
             Estoy aprendiendo frameworks como FastAPI y Flask para dar
             soluciones a problemas reales, aplicando buenas prácticas en el
@@ -84,15 +98,14 @@
         </div>
       </section>
 
-      <!-- Sobre Mí -->
       <section class="about" id="sobre-mi">
         <div class="about__container">
           <h2 class="about__title">Mi Camino en el Desarrollo Backend</h2>
 
           <p class="about__intro">
-            Soy <strong>desarrollador backend con Python en formación</strong>,
-            actualmente cursando el 3er año de Ingeniería en Computación con el
-            objetivo de especializarme en desarrollo de software.
+            Soy <strong>desarrollador Backend con Python</strong>, actualmente
+            cursando el 3er año de Ingeniería en Computación con el objetivo de
+            especializarme en desarrollo de software.
           </p>
 
           <p class="about__text">
@@ -145,7 +158,6 @@
         </div>
       </section>
 
-      <!-- Proyectos -->
       <section class="projects" id="proyectos">
         <div class="projects__container">
           <h2 class="projects__title">Mis Proyectos de Práctica</h2>
@@ -246,7 +258,6 @@
         </div>
       </section>
 
-      <!-- Habilidades -->
       <section class="skills" id="habilidades">
         <div class="skills__container">
           <h2 class="skills__title">Mis Habilidades</h2>
@@ -318,7 +329,6 @@
         </div>
       </section>
 
-      <!-- Contacto -->
       <section class="contact" id="contacto">
         <div class="contact__container">
           <h2 class="contact__title">¿Te gustaría conectar?</h2>
@@ -363,7 +373,6 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
       <div class="footer__container">
         <nav class="footer__nav">
