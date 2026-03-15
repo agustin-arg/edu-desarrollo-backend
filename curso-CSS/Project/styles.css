@@ -26,11 +26,12 @@
   --text-soft: #4d4d4d;
   --line: #1d1d1d;
   --line-soft: #b7b7b1;
-  --accent: #121212;
-  --accent-contrast: #ffffff;
+  --accent: #00a7e1;
+  --accent-contrast: #0f1f34;
   --chip: #ecece7;
   --shadow-1: 0 14px 28px rgba(0, 0, 0, 0.12);
   --shadow-2: 0 22px 36px rgba(0, 0, 0, 0.16);
+  --shadow-accent: 0 14px 28px rgba(0, 15, 130, 0.24);
   --noise:
     radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.045), transparent 40%),
     radial-gradient(circle at 80% 10%, rgba(0, 0, 0, 0.035), transparent 35%),
@@ -41,19 +42,20 @@
   :root {
     color-scheme: dark;
 
-    --bg: #0f0f0f;
-    --bg-soft: #161616;
-    --surface: #1a1a1a;
-    --surface-2: #212121;
-    --text: #f1f1f1;
-    --text-soft: #c7c7c7;
-    --line: #f0f0f0;
-    --line-soft: #4f4f4f;
-    --accent: #f1f1f1;
-    --accent-contrast: #111111;
-    --chip: #2a2a2a;
+    --bg: #202a25;
+    --bg-soft: #18211d;
+    --surface: #26332d;
+    --surface-2: #2e3d36;
+    --text: #d6f8d6;
+    --text-soft: #add6bd;
+    --line: #507dbc;
+    --line-soft: #00a7e1;
+    --accent: #00a7e1;
+    --accent-contrast: #202a25;
+    --chip: #2f436c;
     --shadow-1: 0 18px 30px rgba(0, 0, 0, 0.44);
     --shadow-2: 0 28px 42px rgba(0, 0, 0, 0.5);
+    --shadow-accent: 0 20px 34px rgba(0, 15, 130, 0.56);
     --noise:
       radial-gradient(
         circle at 15% 10%,
@@ -80,19 +82,20 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #0f0f0f;
-  --bg-soft: #161616;
-  --surface: #1a1a1a;
-  --surface-2: #212121;
-  --text: #f1f1f1;
-  --text-soft: #c7c7c7;
-  --line: #f0f0f0;
-  --line-soft: #4f4f4f;
-  --accent: #f1f1f1;
-  --accent-contrast: #111111;
-  --chip: #2a2a2a;
+  --bg: #202a25;
+  --bg-soft: #18211d;
+  --surface: #26332d;
+  --surface-2: #2e3d36;
+  --text: #d6f8d6;
+  --text-soft: #add6bd;
+  --line: #507dbc;
+  --line-soft: #00a7e1;
+  --accent: #00a7e1;
+  --accent-contrast: #202a25;
+  --chip: #2f436c;
   --shadow-1: 0 18px 30px rgba(0, 0, 0, 0.44);
   --shadow-2: 0 28px 42px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 20px 34px rgba(0, 15, 130, 0.56);
   --noise:
     radial-gradient(
       circle at 15% 10%,
@@ -146,11 +149,12 @@ body:has(#theme-toggle:not(:checked)) {
   --text-soft: #4d4d4d;
   --line: #1d1d1d;
   --line-soft: #b7b7b1;
-  --accent: #121212;
-  --accent-contrast: #ffffff;
+  --accent: #00a7e1;
+  --accent-contrast: #0f1f34;
   --chip: #ecece7;
   --shadow-1: 0 14px 28px rgba(0, 0, 0, 0.12);
   --shadow-2: 0 22px 36px rgba(0, 0, 0, 0.16);
+  --shadow-accent: 0 14px 28px rgba(0, 15, 130, 0.24);
   --noise:
     radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.045), transparent 40%),
     radial-gradient(circle at 80% 10%, rgba(0, 0, 0, 0.035), transparent 35%),
@@ -160,19 +164,20 @@ body:has(#theme-toggle:not(:checked)) {
 body:has(#theme-toggle:checked) {
   color-scheme: dark;
 
-  --bg: #0f0f0f;
-  --bg-soft: #161616;
-  --surface: #1a1a1a;
-  --surface-2: #212121;
-  --text: #f1f1f1;
-  --text-soft: #c7c7c7;
-  --line: #f0f0f0;
-  --line-soft: #4f4f4f;
-  --accent: #f1f1f1;
-  --accent-contrast: #111111;
-  --chip: #2a2a2a;
+  --bg: #202a25;
+  --bg-soft: #18211d;
+  --surface: #26332d;
+  --surface-2: #2e3d36;
+  --text: #d6f8d6;
+  --text-soft: #add6bd;
+  --line: #507dbc;
+  --line-soft: #00a7e1;
+  --accent: #00a7e1;
+  --accent-contrast: #202a25;
+  --chip: #2f436c;
   --shadow-1: 0 18px 30px rgba(0, 0, 0, 0.44);
   --shadow-2: 0 28px 42px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 20px 34px rgba(0, 15, 130, 0.56);
   --noise:
     radial-gradient(
       circle at 15% 10%,
@@ -231,7 +236,6 @@ a {
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   backdrop-filter: blur(6px);
   color: var(--text);
-  box-shadow: var(--shadow-1);
   cursor: pointer;
   transition:
     transform var(--anim-fast) var(--ease-fluid),
@@ -246,7 +250,7 @@ a {
   height: 18px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: var(--accent);
+  background: var(--bg);
   transition:
     transform var(--anim-fast) var(--ease-fluid),
     background-color var(--anim-fast) var(--ease-fluid);
@@ -923,6 +927,9 @@ section::after {
     right: 0.65rem;
     min-height: 38px;
     padding: 0.34rem 0.62rem;
+    z-index: 90;
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .theme-toggle__label {
