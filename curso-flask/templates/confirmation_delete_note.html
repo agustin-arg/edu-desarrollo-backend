@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Note</title>
+</head>
+<body>
+    <div class="cuestion">
+    <h1>Are you sure you want to delete this note?</h1>
+    <form method="post" action="{{ url_for('delete_note', id=id) }}">
+    <button type="submit">Yes</button>
+    </form>
+    <a href="{{ url_for('home', error='The note was not delete') }}">No</a>
+    </div>
+</body>
+</html>

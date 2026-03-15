@@ -26,7 +26,7 @@
 
       <input type="submit" value="save" />
     </form>
-    <form method="post" action="{{ url_for('delete_note', id=note.id) }}">
+    <form method="post" action="{{ url_for('confirmation_delete_note', id=note.id) }}">
       <button type="submit">Deleted</button>
     </form>
   </body>

@@ -55,10 +55,12 @@ with app.app_context():
 
 @app.route("/")
 def home():
+    message = request.args.get("message")   # None si no viene
+    error = request.args.get("error")
     role = "user"
     notes = Note.query.all()
     now = now_utc()
-    return render_template("home.html", notes=notes, now=now)
+    return render_template("home.html", notes=notes, now=now, message=message, error=error)
 
 
 @app.route("/about")
@@ -120,12 +122,15 @@ def edit_note(id):
     return render_template("edit_note.html", note=note)
 
 
-@app.route("/delete-note/<int:id>", methods=["POST"])
+@app.route("/delete-note/<int:id>", methods=["post"])
 def delete_note(id):
     note = Note.query.get(id)
     if not note:
-        return redirect(url_for("home"))
+        return redirect(url_for("home", error='Note not found'))
     db.session.delete(note)
     db.session.commit()
+    return redirect(url_for("home", message='Note successfully deleted'))
 
-    return redirect(url_for("home"))
+@app.route("/confirmation/<int:id>")
+def confirmation_delete_note(id):
+    return render_template("confirmation_delete_note.html", id=id)
