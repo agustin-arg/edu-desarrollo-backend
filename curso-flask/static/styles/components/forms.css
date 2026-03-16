@@ -1,0 +1,53 @@
+.form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.form__group {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form__label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+.form__control {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-strong);
+  color: var(--color-text);
+  font: inherit;
+  padding: 0.7rem 0.8rem;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
+}
+
+.form__control:focus {
+  outline: none;
+  border-color: rgba(15, 110, 130, 0.6);
+  box-shadow: 0 0 0 3px rgba(15, 110, 130, 0.12);
+}
+
+.form__control--textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form__hint {
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+}
+
+.form__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}

@@ -1,0 +1,67 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-surface-strong);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(16, 30, 48, 0.12);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(15, 110, 130, 0.28);
+  outline-offset: 2px;
+}
+
+.btn--primary {
+  border-color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--color-brand),
+    var(--color-brand-strong)
+  );
+  color: #ffffff;
+}
+
+.btn--secondary {
+  border-color: rgba(15, 110, 130, 0.3);
+  background-color: rgba(15, 110, 130, 0.11);
+  color: var(--color-brand-strong);
+}
+
+.btn--ghost {
+  border-color: var(--color-line);
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.btn--danger {
+  border-color: transparent;
+  background: linear-gradient(135deg, #bb3e3e, #8d2c2c);
+  color: #ffffff;
+}
+
+.btn--sm {
+  min-height: 2.1rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.84rem;
+}

@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flask Notes | Edit Note</title>
+    <title>Flask Notes | Create Note</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='base.css') }}"
     />
   </head>
-  <body class="page page--edit-note">
+  <body class="page page--create-note">
     <div class="app-shell">
       <header class="topbar">
         <div class="topbar__inner container">
@@ -23,7 +23,9 @@
                 <a class="nav__link" href="{{ url_for('home.home') }}">Home</a>
               </li>
               <li class="nav__item">
-                <a class="nav__link" href="{{ url_for('notes.create_note') }}"
+                <a
+                  class="nav__link nav__link--active"
+                  href="{{ url_for('notes.create_note') }}"
                   >Create note</a
                 >
               </li>
@@ -35,10 +37,10 @@
       <main class="main">
         <div class="container stack">
           <section class="page-header">
-            <h1 class="page-header__title">Edit note #{{ note.id }}</h1>
+            <h1 class="page-header__title">Create a new note</h1>
             <p class="page-header__copy">
-              Update the content, adjust publication date, and keep your entries
-              always current.
+              Write your idea, choose an optional publish date, and keep your
+              notebook always organized.
             </p>
           </section>
 
@@ -51,7 +53,6 @@
                   type="text"
                   name="title"
                   id="title"
-                  value="{{ note.title }}"
                   required
                 />
               </div>
@@ -63,9 +64,7 @@
                   name="content"
                   id="content"
                   required
-                >
-{{ note.content }}</textarea
-                >
+                ></textarea>
               </div>
 
               <div class="form__group">
@@ -75,34 +74,22 @@
                   type="date"
                   name="post"
                   id="post"
-                  value="{{ note.post_at.strftime('%Y-%m-%d') if note.post_at else '' }}"
+                  value="{{ now.strftime('%Y-%m-%d') }}"
                 />
+                <p class="form__hint">
+                  Leave this date as today if you want the note visible
+                  immediately.
+                </p>
               </div>
 
               <div class="form__actions">
                 <button class="btn btn--primary" type="submit">
-                  Save changes
+                  Create note
                 </button>
                 <a class="btn btn--ghost" href="{{ url_for('home.home') }}"
                   >Cancel</a
                 >
               </div>
-            </form>
-          </section>
-
-          <section class="card confirm-card confirm-card--danger">
-            <p class="card__eyebrow">Danger zone</p>
-            <h2 class="section-title">Delete this note</h2>
-            <p class="section-copy">
-              This action is irreversible. Review the content before continuing.
-            </p>
-            <form
-              method="get"
-              action="{{ url_for('notes.confirmation_delete_note', id=note.id) }}"
-            >
-              <button class="btn btn--danger" type="submit">
-                Open delete confirmation
-              </button>
             </form>
           </section>
         </div>

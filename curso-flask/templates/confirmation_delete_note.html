@@ -1,17 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Note</title>
-</head>
-<body>
-    <div class="cuestion">
-    <h1>Are you sure you want to delete this note?</h1>
-    <form method="post" action="{{ url_for('delete_note', id=id) }}">
-    <button type="submit">Yes</button>
-    </form>
-    <a href="{{ url_for('home', error='The note was not delete') }}">No</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask Notes | Confirm Delete</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='base.css') }}"
+    />
+  </head>
+  <body class="page page--delete-note">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="topbar__inner container">
+          <a class="brand" href="{{ url_for('home.home') }}">
+            <span class="brand__mark">FN</span>
+            <span class="brand__text">Flask Notes</span>
+          </a>
+          <nav class="nav" aria-label="Primary navigation">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="{{ url_for('home.home') }}">Home</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="{{ url_for('notes.create_note') }}"
+                  >Create note</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="container stack">
+          <section class="card confirm-card confirm-card--warning">
+            <p class="card__eyebrow">Confirm action</p>
+            <h1 class="card__title">Delete this note permanently?</h1>
+            <p class="section-copy">
+              Once deleted, the note cannot be recovered from the database.
+            </p>
+
+            <div class="form__actions">
+              <form
+                class="note-table__inline-form"
+                method="post"
+                action="{{ url_for('notes.delete_note', id=id) }}"
+              >
+                <button class="btn btn--danger" type="submit">
+                  Yes, delete note
+                </button>
+              </form>
+              <a
+                class="btn btn--ghost"
+                href="{{ url_for('home.home', error='The note was not deleted') }}"
+                >No, keep note</a
+              >
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
-</body>
+  </body>
 </html>

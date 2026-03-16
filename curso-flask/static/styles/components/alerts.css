@@ -1,0 +1,19 @@
+.alert {
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+.alert--success {
+  background-color: var(--color-success-bg);
+  border-color: var(--color-success-line);
+  color: var(--color-success-text);
+}
+
+.alert--error {
+  background-color: var(--color-error-bg);
+  border-color: var(--color-error-line);
+  color: var(--color-error-text);
+}

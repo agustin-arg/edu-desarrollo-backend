@@ -1,0 +1,72 @@
+.card {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(255, 252, 245, 0.96)
+  );
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-lg);
+}
+
+.card--hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: var(--space-md);
+  padding: clamp(1.2rem, 2vw, 2rem);
+}
+
+.card--hero::after {
+  content: "";
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  right: -8rem;
+  top: -9rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(191, 109, 45, 0.18) 0%,
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.card__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.card__title {
+  font-size: clamp(1.65rem, 1.6vw + 1rem, 2.35rem);
+  max-width: 18ch;
+}
+
+.card__lead {
+  color: var(--color-text-soft);
+  max-width: 62ch;
+}
+
+.form-card {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.confirm-card {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 680px;
+}
+
+.confirm-card--warning {
+  border-left: 6px solid var(--color-accent);
+}
+
+.confirm-card--danger {
+  border-left: 6px solid #9b3131;
+}
