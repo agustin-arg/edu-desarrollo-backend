@@ -5,6 +5,7 @@
 fastapi/
 flask/
 oauth/
+django/
 # -------------------------
 # Python cache 
 # -------------------------
