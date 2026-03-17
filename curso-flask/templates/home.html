@@ -1,42 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flask Notes | Home</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='base.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
   </head>
-
   <body class="page page--home">
     <div class="app-shell">
       <header class="topbar">
         <div class="topbar__inner container">
-          <a class="brand" href="{{ url_for('home.home') }}">
+          <a class="brand" href="{{ url_for("home.home") }}">
             <span class="brand__mark">FN</span>
             <span class="brand__text">Flask Notes</span>
           </a>
           <nav class="nav" aria-label="Primary navigation">
             <ul class="nav__list">
               <li class="nav__item">
-                <a
-                  class="nav__link nav__link--active"
-                  href="{{ url_for('home.home') }}"
-                  >Home</a
-                >
+                <a class="nav__link nav__link--active" href="{{ url_for("home.home") }}">Home</a>
               </li>
               <li class="nav__item">
-                <a class="nav__link" href="{{ url_for('notes.create_note') }}"
-                  >Create note</a
-                >
+                <a class="nav__link" href="{{ url_for("notes.create_note") }}">Create note</a>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-
       <main class="main">
         <div class="container stack">
           <section class="card card--hero">
@@ -48,91 +37,75 @@
               templates.
             </p>
             <div class="toolbar">
-              <button type="button" class="btn btn--secondary" id="showBtn">
-                Show notes
-              </button>
-              <button type="button" class="btn btn--ghost" id="hideBtn">
-                Hide notes
-              </button>
-              <a
-                class="btn btn--primary"
-                href="{{ url_for('notes.create_note') }}"
-                >Add new note</a
-              >
+              <button type="button" class="btn btn--secondary" id="showBtn">Show notes</button>
+              <button type="button" class="btn btn--ghost" id="hideBtn">Hide notes</button>
+              <a class="btn btn--primary" href="{{ url_for("notes.create_note") }}">Add new note</a>
             </div>
           </section>
-
-          {% if message %}
-          <div class="alert alert--success" role="status">{{ message }}</div>
-          {% elif error %}
-          <div class="alert alert--error" role="alert">{{ error }}</div>
-          {% endif %}
-
-          <section id="notesPanel" class="notes-panel card" aria-live="polite">
-            <div class="notes-panel__header">
-              <h2 class="section-title">Saved notes</h2>
-              <span class="notes-panel__meta"
-                >{{ notes|length }} total records</span
-              >
-            </div>
-
-            <div class="note-table-wrap">
-              <table class="note-table">
-                <thead class="note-table__head">
-                  <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Created</th>
-                    <th>Edited</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% set visible = namespace(count=0) %} {% for note in notes %}
-                  {% if not note.post_at or note.post_at <= now %} {% set
-                  visible.count = visible.count + 1 %}
-                  <tr class="note-table__row">
-                    <td>{{ note.id }}</td>
-                    <td class="note-table__title">{{ note.title }}</td>
-                    <td class="note-table__content">{{ note.content }}</td>
-                    <td>{{ note.created_at }}</td>
-                    <td>{{ note.edited_at or '-' }}</td>
-                    <td>
-                      <div class="note-table__actions">
-                        <a
-                          class="btn btn--ghost btn--sm"
-                          href="{{ url_for('notes.edit_note', id=note.id) }}"
-                          >Edit</a
-                        >
-                        <form
-                          class="note-table__inline-form"
-                          method="get"
-                          action="{{ url_for('notes.confirmation_delete_note', id=note.id) }}"
-                        >
-                          <button type="submit" class="btn btn--danger btn--sm">
-                            Delete
-                          </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                  {% endif %} {% endfor %} {% if visible.count == 0 %}
-                  <tr class="note-table__row note-table__row--empty">
-                    <td class="note-table__empty" colspan="6">
-                      There are no visible notes right now.
-                    </td>
-                  </tr>
-                  {% endif %}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
-
-    <script>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+              {% if category == 'success' %}
+                <div class="alert alert--success" role="status">{{ message }}</div>
+              {% elif category == 'error' %}
+                <div class="alert alert--error" role="alert">{{ message }}</div>
+              {% endif %}
+            {% endwith %}
+            <section id="notesPanel" class="notes-panel card" aria-live="polite">
+              <div class="notes-panel__header">
+                <h2 class="section-title">Saved notes</h2>
+                <span class="notes-panel__meta">{{ notes|length }} total records</span>
+              </div>
+              <div class="note-table-wrap">
+                <table class="note-table">
+                  <thead class="note-table__head">
+                    <tr>
+                      <th>ID</th>
+                      <th>Title</th>
+                      <th>Content</th>
+                      <th>Created</th>
+                      <th>Edited</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% set visible = namespace(count=0) %}
+                    {% for note in notes %}
+                      {% if not note.post_at or note.post_at <= now %}
+                        {% set
+                        visible.count = visible.count + 1 %}
+                        <tr class="note-table__row">
+                          <td>{{ note.id }}</td>
+                          <td class="note-table__title">{{ note.title }}</td>
+                          <td class="note-table__content">{{ note.content }}</td>
+                          <td>{{ note.created_at }}</td>
+                          <td>{{ note.edited_at or '-' }}</td>
+                          <td>
+                            <div class="note-table__actions">
+                              <a class="btn btn--ghost btn--sm"
+                                 href="{{ url_for('notes.edit_note', id=note.id) }}">Edit</a>
+                              <form class="note-table__inline-form"
+                                    method="get"
+                                    action="{{ url_for('notes.confirmation_delete_note', id=note.id) }}">
+                                <button type="submit" class="btn btn--danger btn--sm">Delete</button>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
+                    {% if visible.count == 0 %}
+                      <tr class="note-table__row note-table__row--empty">
+                        <td class="note-table__empty" colspan="6">There are no visible notes right now.</td>
+                      </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+      <script>
       const showBtn = document.getElementById("showBtn");
       const hideBtn = document.getElementById("hideBtn");
       const notesPanel = document.getElementById("notesPanel");
@@ -146,6 +119,6 @@
       hideBtn.addEventListener("click", () => {
         notesPanel.classList.add("is-hidden");
       });
-    </script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>

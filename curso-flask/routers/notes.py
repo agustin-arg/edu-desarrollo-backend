@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, Blueprint
+from flask import redirect, render_template, request, url_for, Blueprint, flash
 from db import db
 from models import Note
 from services.time import parse_datetime, now_utc
@@ -16,6 +16,7 @@ def create_note():
         db_note = Note(title=title, content=content, post_at=post_dt)
         db.session.add(db_note)
         db.session.commit()
+        flash(message="Note successfully created", category="success")
         return redirect(url_for("home.home"))
     now = now_utc()
     return render_template("create_note.html", now=now)
@@ -45,6 +46,7 @@ def delete_note(id):
         return redirect(url_for("home.home", error="Note not found"))
     db.session.delete(note)
     db.session.commit()
+    flash(message="Note successfully deleted", category="success")
     return redirect(url_for("home.home", message="Note successfully deleted"))
 
 

@@ -11,10 +11,10 @@ class Setting:
     DB_HOST: str = environ.get("DB_HOST")
     DB_PORT: int = environ.get("DB_PORT")
     DB_NAME: str = environ.get("DB_NAME")
+    SECRET_KEY: str = environ.get("SECRET_KEY")
 
     @property
     def DATABASE_URL(self) -> str:
         return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-
 
 setting = Setting()

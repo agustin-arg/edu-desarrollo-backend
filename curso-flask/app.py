@@ -11,6 +11,3 @@ app.register_blueprint(home_bp)
 
 with app.app_context():
     db.create_all()
-
-
-
