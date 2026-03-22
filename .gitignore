@@ -24,3 +24,4 @@ multimedia/
 # db
 # -------------------------
 users.db
+db.sqlite3
