@@ -1,18 +1,8 @@
 from django.shortcuts import render
+from .models import Car
 
 def my_view(request):
-    car_list = [
-    {"title": "BMW"},
-    {"title": "Mazda"},
-    {"title": "Toyota"},
-    {"title": "Honda"},
-    {"title": "Ford"},
-    {"title": "Mercedes-Benz"},
-    {"title": "Audi"},
-    {"title": "Volkswagen"},
-    {"title": "Nissan"},
-    {"title": "Chevrolet"}
-    ]
+    car_list = Car.objects.all()
     context = {
         "car_list": car_list
     }

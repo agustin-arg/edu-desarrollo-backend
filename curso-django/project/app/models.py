@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class Car(models.Model):
     title = models.TextField(max_length=250)
     year = models.TextField(max_length=4, null=True)
@@ -23,6 +24,17 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    author = models.OneToOneField(
+        Author, related_name="author", on_delete=models.CASCADE
+    )
+    website = models.URLField()
+    biography = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.auto_field
 
 
 class Book(models.Model):
