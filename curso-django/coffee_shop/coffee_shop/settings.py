@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
+    "crispy_tailwind",
     "products",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -49,8 +52,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
+CRISPY_TEMPLATE_PACK = "tailwind"
 ROOT_URLCONF = "coffee_shop.urls"
+LOGIN_REDIRECT_URL = "list_product"
 
 TEMPLATES = [
     {
@@ -71,7 +77,7 @@ WSGI_APPLICATION = "coffee_shop.wsgi.application"
 
 MEDIA_URL = "/logos/"
 # Media root should be a path (Path or str), not a list
-MEDIA_ROOT = BASE_DIR / 'logos'
+MEDIA_ROOT = BASE_DIR / "logos"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
