@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Tabla de productos</h1>
+    <thead>
+        <td>ID</td>
+        <td>Nombre</td>
+        <td>Description</td>
+        <td>Precio</td>
+        <td>Disponibilidad</td>
+        <td>Foto</td>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <br>
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.available|yesno:"Sí,No" }}</td>
+                {% if product.photo %}
+                    <td>
+                        <img src="{{ product.photo.url }}"
+                             alt="{{ product.name }}"
+                             style="max-height: 100px">
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+{% endblock content %}
