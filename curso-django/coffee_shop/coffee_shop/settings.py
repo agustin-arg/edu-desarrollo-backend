@@ -57,6 +57,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 ROOT_URLCONF = "coffee_shop.urls"
 LOGIN_REDIRECT_URL = "list_product"
+LOGOUT_REDIRECT_URL = "login"
 
 TEMPLATES = [
     {
