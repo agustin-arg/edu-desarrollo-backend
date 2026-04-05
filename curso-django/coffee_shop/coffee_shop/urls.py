@@ -2,7 +2,7 @@
 URL configuration for coffee_shop project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -16,15 +16,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
-from django.conf import settings
+from django.urls import path, include
 from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
+    path("", include("products.urls")),
     path("admin/", admin.site.urls),
-    path("products/", include("products.urls")),
-    path('usuarios/', include('users.urls'))
-] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("usuarios/", include("users.urls")),
+    path("pedidos/", include("orders.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

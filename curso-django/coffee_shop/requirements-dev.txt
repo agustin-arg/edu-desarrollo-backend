@@ -1,1 +1,2 @@
-ipython==9.11.0
+ipython==8.25.0
+black
