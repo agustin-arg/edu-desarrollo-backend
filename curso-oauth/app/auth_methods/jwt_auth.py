@@ -17,10 +17,15 @@ Required packages (add to requirements.txt):
 Your task: implement the 5 TODO functions below.
 """
 
+# from passlib.context import CryptContext
+from datetime import datetime, timedelta
+import time
+import jwt
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, EmailStr
 from fastapi import APIRouter, Depends, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.security import HTTPBearer
-
 from db import SessionDep
 from dependencies import templates
 from models import UserJWT
@@ -96,3 +101,40 @@ async def jwt_protected(request: Request, session: SessionDep):
     # 3. If invalid/expired → redirect to login with error
     # 4. Load user from DB and render a protected page
     pass
+
+
+JWT_SECRET = "tu_clave_secreta_super_segura_123"
+JWT_ALGORITHM = "HS256"
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    perfil: int
+
+
+# Función auxiliar para dar formato a la respuesta
+def token_response(token: str):
+    return {"access_token": token}
+
+
+# Función para firmar los tokens (Tu lógica original mejorada)
+def signJWT(email: str, perfil: int):
+    payload = {
+        "userID": email,
+        "perfilID": perfil,
+        "expires": time.time() + 60,  # Expira en 10 minutos
+    }
+    token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+    return token_response(token)
+
+
+# Endpoint de FastAPI
+@router.get("/token", response_model=dict[str, str], name="token")
+async def create_upload_file():
+    email = "example@example.com"
+    perfil = 1
+    user = UserLogin(email=email, perfil=perfil)
+    # Aquí normalmente verificarías el usuario en una base de datos
+    # Por ahora, simplemente generamos el token con los datos recibidos
+    token = signJWT(user.email, user.perfil)
+    return token
