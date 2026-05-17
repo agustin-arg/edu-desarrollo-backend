@@ -21,8 +21,10 @@ __pycache__/
 IMG/
 multimedia/
 logos/
+*.mmd
 # -------------------------
 # db
 # -------------------------
 users.db
 db.sqlite3
+
