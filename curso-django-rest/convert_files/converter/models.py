@@ -2,7 +2,7 @@ import os
 import uuid
 from django.db import models
 from django.core.exceptions import ValidationError
-from convert_files.users import User
+from users.models import User
 
 
 def user_directory_path(instance, filename):
