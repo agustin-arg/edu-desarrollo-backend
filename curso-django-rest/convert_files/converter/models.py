@@ -18,9 +18,9 @@ class File(models.Model):
     original_name = models.CharField(max_length=128, editable=False)
     name = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    file_path = models.FileField(upload_to=user_directory_path, editable=False)
+    file_path = models.FileField(upload_to=user_directory_path)
     size_bytes = models.BigIntegerField(editable=False)
-    mime_type = models.CharField(max_length=50)
+    mime_type = models.CharField(max_length=50, editable=False)
     uploaded_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
@@ -40,8 +40,11 @@ class File(models.Model):
 
 class Format(models.Model):
     extension = models.CharField(unique=True, max_length=5)
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=20, blank=True)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.extension
 
 
 class ConvertFormat(models.Model):
@@ -62,6 +65,9 @@ class ConvertFormat(models.Model):
         ]
         verbose_name = "Convert Format"
         verbose_name_plural = "Convert Formats"
+
+    def __str__(self):
+        return f"'{self.original_extension}' to '{self.output_extension}'"
 
 
 class Task(models.Model):
