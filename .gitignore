@@ -18,6 +18,7 @@ __pycache__/
 # -------------------------
 # Multimedia
 # -------------------------
+media/
 IMG/
 multimedia/
 logos/
