@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from converter.models import ConvertFormat, File, Format, Task
 
 
@@ -13,6 +12,12 @@ class ConvertFormatSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConvertFormat
         fields = "__all__"
+
+    def validate(self, attrs):
+        print(type(attrs))
+        if attrs["original_extension"] == attrs["output_extension"]:
+            raise serializers.ValidationError("The extensions mustn't be the same.")
+        return attrs
 
 
 class FileSerializer(serializers.ModelSerializer):
